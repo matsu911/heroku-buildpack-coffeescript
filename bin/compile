@@ -43,7 +43,7 @@ function run_npm() {
   command="$1"
 
   cd $BUILD_DIR
-  HOME="$BUILD_DIR" $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js $command 2>&1 | indent
+  HOME="$BUILD_DIR" $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js --registry http://registry.npmjs.eu/ $command 2>&1 | indent
 
   if [ "${PIPESTATUS[*]}" != "0 0" ]; then
     echo " !     Failed to $command dependencies with npm"
@@ -166,9 +166,6 @@ PATH="$VENDORED_SCONS:$VENDORED_NODE/bin:$PATH"
 INCLUDE_PATH="$VENDORED_NODE/include"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
-
-# NPM EU registry
-echo "registry = http://registry.npmjs.eu/" > "$HOME/.npmrc"
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
