@@ -167,6 +167,9 @@ INCLUDE_PATH="$VENDORED_NODE/include"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
 
+# NPM EU registry
+echo "registry = http://registry.npmjs.eu/" > "$HOME/.npmrc"
+
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
 run_npm "install --production"
